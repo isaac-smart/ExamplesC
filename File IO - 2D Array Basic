@@ -1,0 +1,26 @@
+#include <stdio.h>
+
+int main() {
+    int myArray[3][3];
+    FILE *input;
+    input = fopen("text.txt", "r");
+    FILE *output;
+    output = fopen("bro.txt", "w");
+    int i, p;
+    int largest = 0;
+    int position[2];
+    for(i=0; i<3; i++) {
+        for(p=0; p<3; p++) {
+            fscanf(input, "%d", &myArray[i][p]);
+            fprintf(output, "%d ", myArray[i][p]);
+            if(largest < myArray[i][p]) {
+                largest = myArray[i][p];
+                position[0] = i + 1;
+                position[1] = p + 1;
+            }
+        }
+        fprintf(output, "\n");
+    }
+    fprintf(output, "Largest: %d X: %d Y: %d", largest, position[0], position[1]);
+    return 0;
+}
