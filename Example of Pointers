@@ -1,0 +1,26 @@
+#include <stdio.h>
+#include <ctype.h>
+
+void mean(int *x, int *y, int *z);
+
+int main() {
+    int var = 1, *p;
+    int var1 = 2, *p1;
+    int var2 = 3, *p2;
+    p1 = &var1;
+    p = &var;
+    p2 = &var2;
+    printf("%d %d %d\n", var, var1, var2);
+    mean(p, p1, p2);
+    printf("%d %d %d", var, var1, var2);
+    return 0;
+    
+}
+
+void mean(int *x, int *y, int *z) {
+    
+    *x = ((*x) + (*y) + (*z))/3;
+    *y = 0;
+    *z = 0;
+    return;
+}
