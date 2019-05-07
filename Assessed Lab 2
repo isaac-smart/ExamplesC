@@ -1,0 +1,49 @@
+#include <stdio.h> 
+#include <stdlib.h> 
+#include <limits.h>
+
+void pixelMean(float *r, float *g, float *b); 
+
+int main() {
+    float image[5][5][3]; 
+    int x, y;
+
+    FILE *input;
+    input = fopen("text.txt", "r");
+
+    for(y = 0; y < 5; y++) {
+        for(x = 0; x < 5; x++) {
+            fscanf(input, "%f", &image[x][y][0]);
+            fscanf(input, "%f", &image[x][y][1]);
+            fscanf(input, "%f", &image[x][y][2]);
+        }
+    } 
+    
+    int row = 0, col = 0;
+    float R, G, B;
+    int lim = 2;
+    for(y = 0; y < lim; y++) {
+        for(x = 0; x < 5; x++) {
+            R = image[x][y][0]; 
+            G = image[x][y][1];
+            B = image[x][y][2]; 
+            
+            pixelMean(&R, &G, &B);
+            
+            printf("%d %d: %f %f %f\n", row, col, R, G, B);
+            row++;
+        } 
+        col++;
+        row = 0;
+    }         
+            
+    return 0;
+}
+
+void pixelMean(float *r, float *g, float *b) {
+    float mean;
+    mean = (*r + *g + *b)/3.0;
+    *r = mean;
+    *g = mean;
+    *b = mean;
+}
